@@ -6,11 +6,11 @@ bot = Bot(BOT_CONFIG['TOKEN'])
 dispatcher = Dispatcher()
 
 @dispatcher.message(Command("start"))
-async def response(message):
+async def send_welcome_message(message):
     await message.answer(f"Привет, <b><i>{message.from_user.first_name}</i></b>", parse_mode="HTML")
 
 @dispatcher.message()
-async def offense(message):
+async def send_insult(message):
     await message.answer("Ваня лох")
 
 dispatcher.run_polling(bot)
