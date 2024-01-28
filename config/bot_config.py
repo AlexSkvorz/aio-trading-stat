@@ -1,3 +1,3 @@
 BOT_CONFIG = {
-    'TOKEN': "6400399221:AAGWQEG-QE0JxqZQztI018i-uXlgjoUAAXw"
+    'TOKEN': "bot_http_token"
 }
