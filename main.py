@@ -1,7 +1,7 @@
 import asyncio
 
 from aiogram import Dispatcher, Bot
-from config.bot_config import BOT_CONFIG
+from telegram_bot.config.bot_config_example import BOT_CONFIG
 from telegram_bot.handlers import (start_command_handler, message_handler)
 
 
