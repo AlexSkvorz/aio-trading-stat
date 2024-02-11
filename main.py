@@ -1,12 +1,12 @@
 import asyncio
 
 from aiogram import Dispatcher, Bot
-from telegram_bot.config.bot_config import BOT_CONFIG
+from config import bot_config
 from telegram_bot.handlers import (start_command_handler, message_handler)
 
 
 async def main():
-    bot = Bot(BOT_CONFIG['TOKEN'])
+    bot = Bot(bot_config.TOKEN)
     dp = Dispatcher()
 
     dp.include_routers(
