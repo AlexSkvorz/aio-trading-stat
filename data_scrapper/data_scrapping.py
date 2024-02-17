@@ -1,5 +1,4 @@
 import json
-from dataclasses import dataclass
 
 import pyppeteer
 import time
@@ -10,15 +9,7 @@ from config import scrapper_config
 from data_scrapper.calculations import calculate_week_user_profits
 from old_database import users_rights_table, weeks_stats_table
 from utils import date_utils
-
-
-@dataclass
-class MonitorData:
-    overall_balance: float
-    overall_profit: float
-    overall_profit_percent: float
-    week_profit: float
-    week_profit_percent: float
+from data_scrapper.monitor_data import MonitorData
 
 
 def dollars_to_number(dollars):

@@ -6,6 +6,8 @@ import sys
 from celery import Celery
 from celery.schedules import crontab
 
+from data_scrapper.monitor_data import MonitorData
+
 root_path = pathlib.Path(__file__).parent.parent
 sys.path.append(str(root_path))
 
@@ -39,7 +41,7 @@ app.conf.beat_schedule = CELERY_BEAT_SCHEDULE
 def scrap_data_task(self):
     db_connection = create_db_connection()
     logging.info("Start scraping data...")
-    monitor_data = asyncio.run(data_scrapping.scrap_data())
+    monitor_data: MonitorData = asyncio.run(data_scrapping.scrap_data())
     if monitor_data:
         logging.info("Data was scrapped successfully!")
         logging.info("Saving scrapped data to database...")
