@@ -3,7 +3,7 @@ import asyncio
 from aiogram import Dispatcher, Bot
 from config import bot_config
 from telegram_bot.handlers import (start_command_handler, message_handler)
-from telegram_bot.database.database_connection import db_manager
+from database.database_connection import db_manager
 
 
 async def main():

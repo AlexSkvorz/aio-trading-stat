@@ -1,10 +1,12 @@
 import asyncio
 import socket
+import logging
+import asyncpg
 from sqlalchemy import MetaData
-from sqlalchemy.exc import OperationalError
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from config.database_config import POSTGRES_CONNECTION
-from telegram_bot.database.database_model import Base
+from database.database_manager import Base
+from config.logging_config import configure_logging
 
 
 class DatabaseManager:
@@ -18,16 +20,17 @@ class DatabaseManager:
             async with self.engine.begin() as conn:
                 await conn.run_sync(Base.metadata.create_all)
             self.engine.echo = True
+        except ConnectionRefusedError:
+            logging.fatal("Удаленный компьютер отклонил это сетевое подключение")
         except socket.gaierror:
-            print("Не удалось разрешить имя хоста в строке подключения к базе данных")
-            raise
+            logging.fatal("Не удалось разрешить имя хоста в строке подключения к базе данных")
+        except asyncpg.exceptions.ConnectionDoesNotExistError:
+            logging.fatal("Соединение было закрыто во время операции")
 
     async def async_init(self):
         await self.init_models()
 
 
-try:
-    db_manager = DatabaseManager(POSTGRES_CONNECTION)
-    asyncio.run(db_manager.init_models())
-except (OperationalError, socket.gaierror):
-    print("Не удалось инициализировать DatabaseManager")
+configure_logging()
+db_manager = DatabaseManager(POSTGRES_CONNECTION)
+asyncio.run(db_manager.init_models())
