@@ -2,3 +2,5 @@
 *__pycache__*
 *.db
 *.log
+config/bot_config.py
+config/database_config.py
