@@ -10,7 +10,7 @@ def create_real_column():
 
 class User(Base):
     __tablename__ = 'user'
-    tg_id = Column(BigInteger, primary_key=True)
+    tg_id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
 
 
 class Role(Base):
@@ -21,7 +21,7 @@ class Role(Base):
 
 class Operation(Base):
     __tablename__ = 'operation'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
     tg_id = Column(BigInteger, nullable=False)
     date = Column(Date, nullable=False)
     dollar_amount = create_real_column()
@@ -31,14 +31,14 @@ class Operation(Base):
 
 class Balance(Base):
     __tablename__ = 'balance'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
     balance = create_real_column()
     user_tg_id = Column(BigInteger, ForeignKey('user.tg_id'), nullable=False)
 
 
 class UserWeekStat(Base):
     __tablename__ = 'user_week_stat'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
     date = Column(Date)
     tg_id = Column(BigInteger, ForeignKey('operation.id'))
     balance = create_real_column()
@@ -50,7 +50,7 @@ class UserWeekStat(Base):
 
 class WeekStatOverall(Base):
     __tablename__ = 'week_stat_overall'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
     overall_profit = create_real_column()
     overall_profit_percent = create_real_column()
     week_profit = create_real_column()
