@@ -4,10 +4,6 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-def create_real_column():
-    return Column(REAL, nullable=False)
-
-
 class User(Base):
     __tablename__ = 'user'
     tg_id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
@@ -24,15 +20,15 @@ class Operation(Base):
     id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
     tg_id = Column(BigInteger, nullable=False)
     date = Column(Date, nullable=False)
-    dollar_amount = create_real_column()
-    dollar_price = create_real_column()
-    rubles_amount = create_real_column()
+    dollar_amount = Column(REAL, nullable=False)
+    dollar_price = Column(REAL, nullable=False)
+    rubles_amount = Column(REAL, nullable=False)
 
 
 class Balance(Base):
     __tablename__ = 'balance'
     id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
-    balance = create_real_column()
+    balance = Column(REAL, nullable=False)
     user_tg_id = Column(BigInteger, ForeignKey('user.tg_id'), nullable=False)
 
 
@@ -41,20 +37,20 @@ class UserWeekStat(Base):
     id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
     date = Column(Date)
     tg_id = Column(BigInteger, ForeignKey('operation.id'))
-    balance = create_real_column()
-    overall_profit = create_real_column()
-    overall_profit_percent = create_real_column()
-    week_profit = create_real_column()
-    week_profit_percent = create_real_column()
+    balance = Column(REAL, nullable=False)
+    overall_profit = Column(REAL, nullable=False)
+    overall_profit_percent = Column(REAL, nullable=False)
+    week_profit = Column(REAL, nullable=False)
+    week_profit_percent = Column(REAL, nullable=False)
 
 
 class WeekStatOverall(Base):
     __tablename__ = 'week_stat_overall'
     id = Column(BigInteger, primary_key=True, unique=True, nullable=False)
-    overall_profit = create_real_column()
-    overall_profit_percent = create_real_column()
-    week_profit = create_real_column()
-    week_profit_percent = create_real_column()
+    overall_profit = Column(REAL, nullable=False)
+    overall_profit_percent = Column(REAL, nullable=False)
+    week_profit = Column(REAL, nullable=False)
+    week_profit_percent = Column(REAL, nullable=False)
 
 
 class Deposit(Base):
