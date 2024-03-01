@@ -4,3 +4,4 @@
 *.log
 config/bot_config.py
 config/database_config.py
+config/logging_config.py
