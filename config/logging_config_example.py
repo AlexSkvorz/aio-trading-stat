@@ -1,5 +1,5 @@
 import logging
 
-LOGFILE = 'logs/fatal_errors.log'
+LOGFILE = 'path/your_file.log'
 LOGLEVEL = logging.INFO
-LOGFORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)'
+LOGFORMAT = '%(asctime)s %(levelname)s:%(message)s'
