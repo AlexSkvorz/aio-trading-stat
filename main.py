@@ -4,10 +4,12 @@ from aiogram import Dispatcher, Bot
 from config import bot_config
 from telegram_bot.handlers import (start_command_handler, message_handler)
 from config.database_config import POSTGRES_CONNECTION
-from database.database_connection import DatabaseManager
+from database.database_manager import DatabaseManager
+from logs.logging import configure_logging
 
 
 async def main():
+    configure_logging()
     db_manager = DatabaseManager(POSTGRES_CONNECTION)
     await db_manager.init_models()
     bot = Bot(bot_config.TOKEN)
