@@ -9,7 +9,7 @@ from logs.logging import configure_logging
 
 
 async def main():
-    configure_logging()
+    await configure_logging()
     db_manager = DatabaseManager(POSTGRES_CONNECTION)
     await db_manager.init_models()
     bot = Bot(bot_config.TOKEN)
